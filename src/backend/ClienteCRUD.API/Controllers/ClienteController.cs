@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClienteCRUD.Application.UseCases.Registrar;
+using ClienteCRUD.Communication.Requests;
+using ClienteCRUD.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClienteCRUD.API.Controllers
@@ -8,9 +10,14 @@ namespace ClienteCRUD.API.Controllers
     public class ClienteController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Registrar()
+        [ProducesResponseType(typeof(ResponseUsuarioRegistrado), StatusCodes.Status201Created)]
+        public IActionResult Registrar(RequestRegistrarUsuario request)
         {
-            return Created();
+            var useCase = new RegistrarUsuarioUseCase();
+
+            var result = useCase.Execute(request);
+
+            return Created(string.Empty, result);
         }
     }
 }
