@@ -11,13 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\shared\ClienteCRUD.Communication\ClienteCRUD.Communication.csproj" />
     <ProjectReference Include="..\..\shared\ClienteCRUD.Exceptions\ClienteCRUD.Exceptions.csproj" />
     <ProjectReference Include="..\ClienteCRUD.Application\ClienteCRUD.Application.csproj" />
+    <ProjectReference Include="..\ClienteCRUD.Infrastructure\ClienteCRUD.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
