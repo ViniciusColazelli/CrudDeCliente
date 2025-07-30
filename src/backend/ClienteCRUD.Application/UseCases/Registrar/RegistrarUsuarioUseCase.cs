@@ -1,5 +1,6 @@
 ﻿using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
+using ClienteCRUD.Exceptions.ExceptionBase;
 
 namespace ClienteCRUD.Application.UseCases.Registrar
 {
@@ -21,7 +22,8 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             };
         }
 
-        // esse metodo validate vai validar se a request é valida de acordo com o nosso RegistrarUsuarioValidator e tem um if para se o resultado for invalido retornar uma mensagem de erro sem tratamento ainda.
+        // esse metodo validate vai validar se a request é valida de acordo com o nosso RegistrarUsuarioValidator e
+        // tem um if para se o resultado for invalido retornar uma mensagem de erro.
         private void Validate(RequestRegistrarUsuario request)
         {
             var validator = new RegistrarUsuarioValidator();
@@ -30,9 +32,9 @@ namespace ClienteCRUD.Application.UseCases.Registrar
 
             if (result.IsValid == false)
             {
-                var mensagemErro = result.Errors.Select(e => e.ErrorMessage);
+                var mensagemErro = result.Errors.Select(e => e.ErrorMessage).ToList();
 
-                throw new Exception();
+                throw new ErroEmValidacaoException(mensagemErro);
             }
         }
     }
