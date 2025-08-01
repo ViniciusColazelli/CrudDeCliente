@@ -1,4 +1,6 @@
-﻿using ClienteCRUD.Communication.Requests;
+﻿using ClienteCRUD.Application.Services.Criptografia;
+using ClienteCRUD.Application.Services.Mapeamento;
+using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
 using ClienteCRUD.Exceptions.ExceptionBase;
 
@@ -11,10 +13,14 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             Validate(request);
 
             // mapear a request pra uma entidade
+            var user = MapearRequest.RequestParaEntidade(request);
 
             // Criptografar a senha
+            var criptografiaDeSenha = new SenhaCriptografada();
+            user.Senha = criptografiaDeSenha.Criptografia(request.Senha);
 
             // Salvar no banco de dados
+
 
             return new ResponseUsuarioRegistrado
             {
