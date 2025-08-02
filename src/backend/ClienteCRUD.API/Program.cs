@@ -1,4 +1,6 @@
 using ClienteCRUD.API.Filtros;
+using ClienteCRUD.Application;
+using ClienteCRUD.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMvc(opcao => opcao.Filters.Add(typeof(FiltroException))); // esse builder serve para que nossa API entenda que essa classe 'FiltroException' seja utilizada como um filtro de Exceção
+
+builder.Services.AddInfrastructure(); // esses dois servem para adicionar as injeções de dependencia de infraestrutura e application
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

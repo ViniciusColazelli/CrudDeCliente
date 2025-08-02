@@ -9,7 +9,7 @@ namespace ClienteCRUD.Infrastructure.DataAcess
     {
         public ClienteCrudDbContext(DbContextOptions options) : base(options) { } // vou receber como parametro as opções do DbContextOptions e vou repassar para o construtor do DbContext
                                                                               // por isso tem esse base(options)
-        public DbSet<User> Users { get; set; } // esse DbSet é uma tabela e eu passo como parametro a entidade User.
+        public DbSet<User> Users { get; set; } // esse DbSet é uma tabela e eu passo como parametro a entidade User tendo uma tabela com as propriedades do User no caso: nome, CPF, email e senha.
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

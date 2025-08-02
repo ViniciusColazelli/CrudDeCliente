@@ -2,13 +2,17 @@
 using ClienteCRUD.Application.Services.Mapeamento;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
+using ClienteCRUD.Domain.Repositories;
 using ClienteCRUD.Exceptions.ExceptionBase;
 
 namespace ClienteCRUD.Application.UseCases.Registrar
 {
     public class RegistrarUsuarioUseCase
     {
-        public ResponseUsuarioRegistrado Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
+        private readonly IUserWriteOnlyRepository _UserWriteOnly;
+        private readonly IUserReadOnlyRepository _UserReadOnly;
+
+        public async Task<ResponseUsuarioRegistrado> Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
         {
             Validate(request);
 
@@ -20,7 +24,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             user.Senha = criptografiaDeSenha.Criptografia(request.Senha);
 
             // Salvar no banco de dados
-
+            await _UserWriteOnly.Adicionar(user);
 
             return new ResponseUsuarioRegistrado
             {
