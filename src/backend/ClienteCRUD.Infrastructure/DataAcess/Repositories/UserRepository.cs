@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
 {
-    public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ClienteCrudDbContext _dbContext; // o readonly serve para que somente o construtor dessa classe no caso UserRepository que pode alterar a instancia do _dbContext
 

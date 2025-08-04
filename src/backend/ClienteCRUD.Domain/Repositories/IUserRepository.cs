@@ -2,8 +2,10 @@
 
 namespace ClienteCRUD.Domain.Repositories
 {
-    public interface IUserWriteOnlyRepository
+    public interface IUserRepository
     {
         public Task Adicionar(User user);
+
+        public Task EmailJaRegistrado(string email);
     }
 }

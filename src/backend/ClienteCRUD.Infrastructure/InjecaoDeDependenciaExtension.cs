@@ -9,9 +9,9 @@ namespace ClienteCRUD.Infrastructure
     public static class InjecaoDeDependenciaExtension
     {
         public static void AddInfrastructure(this IServiceCollection services)
-        {
-            AddRepositories(services);
+        {      
             AddDbContext_MySql(services);
+            AddRepositories(services);
         }
         private static void AddDbContext_MySql(IServiceCollection services)
         {
@@ -22,8 +22,7 @@ namespace ClienteCRUD.Infrastructure
         }
         private static void AddRepositories(IServiceCollection services)
         {
-            services.AddScoped<IUserWriteOnlyRepository, UserRepository>(); // quando alguem solicitar um "IUserWriteOnlyRepository" eu preciso devolver uma instancia do meu "UserRepository"
-            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>(); // quando alguem solicitar um "IUserRepository" eu preciso devolver uma instancia do meu "UserRepository" dando um new no UserRepository
         }
     }
 }

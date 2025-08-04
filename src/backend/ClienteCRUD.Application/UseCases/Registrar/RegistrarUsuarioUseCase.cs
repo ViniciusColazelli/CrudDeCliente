@@ -7,10 +7,13 @@ using ClienteCRUD.Exceptions.ExceptionBase;
 
 namespace ClienteCRUD.Application.UseCases.Registrar
 {
-    public class RegistrarUsuarioUseCase
+    public class RegistrarUsuarioUseCase : IRegistrarUsuarioUseCase
     {
-        private readonly IUserWriteOnlyRepository _UserWriteOnly;
-        private readonly IUserReadOnlyRepository _UserReadOnly;
+        private readonly IUserRepository _userRepository;
+        public RegistrarUsuarioUseCase(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<ResponseUsuarioRegistrado> Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
         {
@@ -24,7 +27,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             user.Senha = criptografiaDeSenha.Criptografia(request.Senha);
 
             // Salvar no banco de dados
-            await _UserWriteOnly.Adicionar(user);
+            await _userRepository.Adicionar(user);
 
             return new ResponseUsuarioRegistrado
             {
