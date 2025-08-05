@@ -10,9 +10,11 @@ namespace ClienteCRUD.Application.UseCases.Registrar
     public class RegistrarUsuarioUseCase : IRegistrarUsuarioUseCase
     {
         private readonly IUserRepository _userRepository;
-        public RegistrarUsuarioUseCase(IUserRepository userRepository)
+        private readonly ISalvarDB _salvarDB;
+        public RegistrarUsuarioUseCase(IUserRepository userRepository,ISalvarDB salvarDB)
         {
             _userRepository = userRepository;
+            _salvarDB = salvarDB;
         }
 
         public async Task<ResponseUsuarioRegistrado> Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
@@ -26,8 +28,11 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             var criptografiaDeSenha = new SenhaCriptografada();
             user.Senha = criptografiaDeSenha.Criptografia(request.Senha);
 
-            // Salvar no banco de dados
+            // Adicionar no banco de dados
             await _userRepository.Adicionar(user);
+
+            // Salvar no banco de dados
+            await _salvarDB.Commit();
 
             return new ResponseUsuarioRegistrado
             {

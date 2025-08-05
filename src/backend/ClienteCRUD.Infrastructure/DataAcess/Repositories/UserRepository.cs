@@ -15,12 +15,12 @@ namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
 
         public async Task Adicionar(User user)
         {
-            await _dbContext.Users.AddAsync(user);
+            await _dbContext.Clientes.AddAsync(user);
         }
 
         public async Task EmailJaRegistrado(string email)
         {
-            await _dbContext.Users.AnyAsync(user => user.Email.Equals(email));
+            await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email));
         }
     }
 }
