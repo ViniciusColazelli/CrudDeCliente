@@ -6,6 +6,6 @@ namespace ClienteCRUD.Domain.Repositories
     {
         public Task Adicionar(User user);
 
-        public Task EmailJaRegistrado(string email);
+        public Task<bool> EmailJaRegistrado(string email);
     }
 }

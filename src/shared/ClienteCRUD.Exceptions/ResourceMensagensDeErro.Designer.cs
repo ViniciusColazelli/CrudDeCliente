@@ -88,6 +88,15 @@ namespace ClienteCRUD.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail ja registrado.
+        /// </summary>
+        public static string EMAIL_JA_REGISTRADO {
+            get {
+                return ResourceManager.GetString("EMAIL_JA_REGISTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail não pode ser vazio.
         /// </summary>
         public static string EMAIL_VAZIO {

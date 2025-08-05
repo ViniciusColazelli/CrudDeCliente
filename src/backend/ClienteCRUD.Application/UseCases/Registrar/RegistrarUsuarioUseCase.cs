@@ -3,6 +3,7 @@ using ClienteCRUD.Application.Services.Mapeamento;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
 using ClienteCRUD.Domain.Repositories;
+using ClienteCRUD.Exceptions;
 using ClienteCRUD.Exceptions.ExceptionBase;
 
 namespace ClienteCRUD.Application.UseCases.Registrar
@@ -11,7 +12,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
     {
         private readonly IUserRepository _userRepository;
         private readonly ISalvarDB _salvarDB;
-        public RegistrarUsuarioUseCase(IUserRepository userRepository,ISalvarDB salvarDB)
+        public RegistrarUsuarioUseCase(IUserRepository userRepository, ISalvarDB salvarDB)
         {
             _userRepository = userRepository;
             _salvarDB = salvarDB;
@@ -19,7 +20,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
 
         public async Task<ResponseUsuarioRegistrado> Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
         {
-            Validate(request);
+            await Validate(request);
 
             // mapear a request pra uma entidade
             var user = MapearRequest.RequestParaEntidade(request);
@@ -42,11 +43,17 @@ namespace ClienteCRUD.Application.UseCases.Registrar
 
         // esse metodo validate vai validar se a request é valida de acordo com o nosso RegistrarUsuarioValidator e
         // tem um if para se o resultado for invalido retornar uma mensagem de erro.
-        private void Validate(RequestRegistrarUsuario request)
+        private async Task Validate(RequestRegistrarUsuario request)
         {
             var validator = new RegistrarUsuarioValidator();
 
             var result = validator.Validate(request);
+
+            var emailExist = await _userRepository.EmailJaRegistrado(request.Email); // verificar se o email já existe no banco de dados
+            if (emailExist)
+            {
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMensagensDeErro.EMAIL_JA_REGISTRADO));
+            }
 
             if (result.IsValid == false)
             {

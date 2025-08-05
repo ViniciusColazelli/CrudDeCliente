@@ -18,9 +18,9 @@ namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
             await _dbContext.Clientes.AddAsync(user);
         }
 
-        public async Task EmailJaRegistrado(string email)
+        public async Task<bool> EmailJaRegistrado(string email)
         {
-            await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email));
+            return await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email));
         }
     }
 }
