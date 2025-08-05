@@ -1,1 +1,1 @@
-Projeto API com ASP.NET de CRUD simples de registro de cliente
+Projeto API com ASP.NET, CRUD simples de registro de cliente
