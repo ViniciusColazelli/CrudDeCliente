@@ -97,6 +97,15 @@ namespace ClienteCRUD.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email e/ou senha invalido.
+        /// </summary>
+        public static string EMAIL_OU_SENHA_INVALIDO {
+            get {
+                return ResourceManager.GetString("EMAIL_OU_SENHA_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail não pode ser vazio.
         /// </summary>
         public static string EMAIL_VAZIO {

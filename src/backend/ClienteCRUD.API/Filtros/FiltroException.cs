@@ -28,12 +28,17 @@ namespace ClienteCRUD.API.Filtros
 
         private void LidarComExceptions(ExceptionContext contexto)
         {
+            if (contexto.Exception is ErroEmLoginException)
+            {
+                contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                contexto.Result = new UnauthorizedObjectResult(new ResponseErro(contexto.Exception.Message));
+            }
             if (contexto.Exception is ErroEmValidacaoException)
             {
                 var exception = contexto.Exception as ErroEmValidacaoException;
 
                 contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                contexto.Result = new BadRequestObjectResult(new ResponseErro(exception.MensagemDeErro));
+                contexto.Result = new BadRequestObjectResult(new ResponseErro(exception!.MensagemDeErro));
             }
         }
 
