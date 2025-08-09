@@ -4,7 +4,7 @@
     {
         public IList<string> MensagemDeErro { get; set; }
 
-        public ErroEmValidacaoException(IList<string> MensagensDeErros)
+        public ErroEmValidacaoException(IList<string> MensagensDeErros) : base(string.Empty)
         {
             MensagemDeErro = MensagensDeErros;
         }

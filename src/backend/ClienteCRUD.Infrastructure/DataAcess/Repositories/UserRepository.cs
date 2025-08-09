@@ -22,5 +22,10 @@ namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
         {
             return await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email));
         }
+
+        public async Task<User?> GetEmailAndPassword(string email, string senha)
+        {
+            return await _dbContext.Clientes.AsNoTracking().FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
+        }
     }
 }
