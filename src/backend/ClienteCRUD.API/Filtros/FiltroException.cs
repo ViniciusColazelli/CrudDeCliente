@@ -33,7 +33,7 @@ namespace ClienteCRUD.API.Filtros
                 contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 contexto.Result = new UnauthorizedObjectResult(new ResponseErro(contexto.Exception.Message));
             }
-            if (contexto.Exception is ErroEmValidacaoException)
+            else if (contexto.Exception is ErroEmValidacaoException)
             {
                 var exception = contexto.Exception as ErroEmValidacaoException;
 

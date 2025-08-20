@@ -20,8 +20,9 @@ namespace ClienteCRUD.Application.UseCases.Login
         {
             var senhaCriptografada = _senhaCriptografada.Criptografia(request.Senha);
 
-            var user = await _userRepository.GetEmailAndPassword(request.Email, senhaCriptografada) ?? throw new ErroEmLoginException();
-
+            var user = await _userRepository.GetEmailAndPassword(request.Email, senhaCriptografada) ?? throw new ErroEmLoginException();// esses dois interrogativos são para verificar
+                                                                                                                                   // caso seja nulo o metodo ou algum parametro do GetEmailAndPassword(),
+                                                                                                                                // se for nulo, lança a exceção ErroEmLoginException se não, segue o fluxo
             return new ResponseUsuarioRegistrado()
             {
                 Nome = user.Nome

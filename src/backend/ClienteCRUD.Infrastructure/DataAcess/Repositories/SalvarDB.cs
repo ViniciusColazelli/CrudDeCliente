@@ -1,6 +1,6 @@
 ﻿using ClienteCRUD.Domain.Repositories;
 
-namespace ClienteCRUD.Infrastructure.DataAcess
+namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
 {
     public class SalvarDB : ISalvarDB
     {
