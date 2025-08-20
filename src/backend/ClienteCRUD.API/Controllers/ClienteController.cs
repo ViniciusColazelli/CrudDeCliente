@@ -1,4 +1,4 @@
-﻿using ClienteCRUD.Application.UseCases.Login;
+﻿using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
@@ -22,13 +22,13 @@ namespace ClienteCRUD.API.Controllers
             return Created(string.Empty, result);
         }
 
-/*        [HttpGet]
+        [HttpGet]
         [ProducesResponseType(typeof(ResponseClienteProfile), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetUserProfile([FromServices] )
+        public async Task<IActionResult> GetUserProfile([FromServices] IGetClienteProfileUseCase useCase)
         {
             var result = await useCase.Execute();
 
             return Ok(result);
-        }*/
+        }
     }
 }
