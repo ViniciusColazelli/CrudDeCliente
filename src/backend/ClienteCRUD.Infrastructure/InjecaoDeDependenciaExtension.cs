@@ -1,6 +1,8 @@
 ﻿using ClienteCRUD.Domain.Repositories;
+using ClienteCRUD.Domain.Services.ClienteLogado;
 using ClienteCRUD.Infrastructure.DataAcess;
 using ClienteCRUD.Infrastructure.DataAcess.Repositories;
+using ClienteCRUD.Infrastructure.Services.ClienteLogado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ namespace ClienteCRUD.Infrastructure
         {      
             AddDbContext_MySql(services, configuration);
             AddRepositories(services);
+            AddClienteLogado(services);
         }
         private static void AddDbContext_MySql(IServiceCollection services, IConfiguration configuration)
         {
@@ -26,6 +29,10 @@ namespace ClienteCRUD.Infrastructure
             services.AddScoped<ISalvarDB, SalvarDB>();
 
             services.AddScoped<IUserRepository, UserRepository>(); // quando alguem solicitar um "IUserRepository" eu preciso devolver uma instancia do meu "UserRepository" dando um new no UserRepository
+        }
+        private static void AddClienteLogado(IServiceCollection services)
+        {
+            services.AddScoped<IClienteLogado, ClienteLogado>();
         }
     }
 }

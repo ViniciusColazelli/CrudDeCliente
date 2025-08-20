@@ -18,7 +18,7 @@ namespace ClienteCRUD.Application
         {
             services.AddScoped<IRegistrarUsuarioUseCase, RegistrarUsuarioUseCase>(); // essa é a parte que faria um new RegistrarUsuarioUseCase() mas é desse jeito que faz por injeção de dependencia. 
             services.AddScoped<ILoginUsuarioUseCase, LoginUsuarioUseCase>(); // aqui é a mesma coisa, só que para o LoginUsuarioUseCase
-            //services.AddScoped<IGetClienteProfileUseCase, GetClienteProfileUseCase>();
+            services.AddScoped<IGetClienteProfileUseCase, GetClienteProfileUseCase>();
         }
 
         private static void SenhaCriptografada(IServiceCollection services)
