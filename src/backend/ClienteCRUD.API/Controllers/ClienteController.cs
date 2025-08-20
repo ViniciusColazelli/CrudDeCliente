@@ -21,5 +21,14 @@ namespace ClienteCRUD.API.Controllers
 
             return Created(string.Empty, result);
         }
+
+/*        [HttpGet]
+        [ProducesResponseType(typeof(ResponseClienteProfile), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetUserProfile([FromServices] )
+        {
+            var result = await useCase.Execute();
+
+            return Ok(result);
+        }*/
     }
 }

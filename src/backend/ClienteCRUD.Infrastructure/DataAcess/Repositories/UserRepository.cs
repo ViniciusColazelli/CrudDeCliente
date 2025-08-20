@@ -18,14 +18,14 @@ namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
             await _dbContext.Clientes.AddAsync(user);
         }
 
-        public async Task<bool> EmailJaRegistrado(string email)
+        public async Task<bool> ClienteAtivoComEmail(string email)
         {
-            return await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email));
+            return await _dbContext.Clientes.AnyAsync(user => user.Email.Equals(email) && user.Active);
         }
 
         public async Task<User?> GetEmailAndPassword(string email, string senha)
         {
-            return await _dbContext.Clientes.AsNoTracking().FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Senha.Equals(senha));
+            return await _dbContext.Clientes.AsNoTracking().FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email) && user.Senha.Equals(senha));
         }
     }
 }

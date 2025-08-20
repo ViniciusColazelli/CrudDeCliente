@@ -49,7 +49,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
 
             var result = validator.Validate(request);
 
-            var emailExist = await _userRepository.EmailJaRegistrado(request.Email); // verificar se o email já existe no banco de dados
+            var emailExist = await _userRepository.ClienteAtivoComEmail(request.Email); // verificar se o email já existe no banco de dados
             if (emailExist)
             {
                 result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMensagensDeErro.EMAIL_JA_REGISTRADO));
