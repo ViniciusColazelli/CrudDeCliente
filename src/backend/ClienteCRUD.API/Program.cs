@@ -1,3 +1,4 @@
+using ClienteCRUD.API.Converters;
 using ClienteCRUD.API.Filtros;
 using ClienteCRUD.Application;
 using ClienteCRUD.Infrastructure;
@@ -6,9 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter())); // esse AddJsonOptions serve para adicionar o nosso conversor de string
+builder.Services.AddEndpointsApiExplorer();                                                                                       // que foi criado na pasta Converters, que serve para remover os espaços
+builder.Services.AddSwaggerGen();                                                                                                 // em branco extras de uma string e
+                                                                                                                                  // deixar como padrão um espaço em branco entre uma palavra,
+                                                                                                                                  // por exemplo: "Vinicius Colazelli" tem um espaço entre o nome e sobrenome
 
 builder.Services.AddMvc(opcao => opcao.Filters.Add(typeof(FiltroException))); // esse builder serve para que nossa API entenda que essa classe 'FiltroException' seja utilizada como um filtro de Exceção
 
