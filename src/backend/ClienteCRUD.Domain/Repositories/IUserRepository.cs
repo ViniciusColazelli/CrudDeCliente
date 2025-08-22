@@ -9,5 +9,9 @@ namespace ClienteCRUD.Domain.Repositories
         public Task<bool> ClienteAtivoComEmail(string email);
 
         public Task<User?> GetEmailAndPassword(string email, string senha);
+
+        public Task<User> GetById(long id);
+
+        public void Update(User user);
     }
 }
