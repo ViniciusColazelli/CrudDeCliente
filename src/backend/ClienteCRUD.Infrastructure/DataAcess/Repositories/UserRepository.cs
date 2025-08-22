@@ -27,5 +27,15 @@ namespace ClienteCRUD.Infrastructure.DataAcess.Repositories
         {
             return await _dbContext.Clientes.AsNoTracking().FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email) && user.Senha.Equals(senha));
         }
+
+        public async Task<User> GetById(long id)
+        {
+            return await _dbContext.Clientes.FirstAsync(user => user.Id == id);
+        }
+
+        public void Update(User user)
+        {
+            _dbContext.Clientes.Update(user);
+        }
     }
 }

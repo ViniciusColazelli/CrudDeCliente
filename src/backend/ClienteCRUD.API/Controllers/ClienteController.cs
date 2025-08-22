@@ -1,5 +1,6 @@
 ﻿using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
+using ClienteCRUD.Application.UseCases.Update;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,16 @@ namespace ClienteCRUD.API.Controllers
             var result = await useCase.Execute();
 
             return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Atualizar([FromServices] IUpdateClienteUseCase useCase, [FromBody] RequestUpdateCliente request)
+        {
+            await useCase.Execute(request);
+
+            return NoContent();
         }
     }
 }
