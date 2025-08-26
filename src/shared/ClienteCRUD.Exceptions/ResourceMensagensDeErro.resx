@@ -141,6 +141,9 @@
   <data name="NOME_VAZIO" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
   </data>
+  <data name="SENHA_ATUAL_NAO_REGISTRADA" xml:space="preserve">
+    <value>Não foi possível alterar a senha. Verifique sua senha atual e tente novamente.</value>
+  </data>
   <data name="SENHA_INVALIDA" xml:space="preserve">
     <value>A senha deve possuir mais de 6 caracteres</value>
   </data>

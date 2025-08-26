@@ -1,5 +1,6 @@
 ﻿using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
+using ClienteCRUD.Application.UseCases.TrocarSenha;
 using ClienteCRUD.Application.UseCases.Update;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
@@ -36,6 +37,16 @@ namespace ClienteCRUD.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Atualizar([FromServices] IUpdateClienteUseCase useCase, [FromBody] RequestUpdateCliente request)
+        {
+            await useCase.Execute(request);
+
+            return NoContent();
+        }
+
+        [HttpPut("change-password")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AlterarSenha([FromServices] ITrocarSenhaUseCase useCase, [FromBody] RequestTrocarSenha request)
         {
             await useCase.Execute(request);
 
