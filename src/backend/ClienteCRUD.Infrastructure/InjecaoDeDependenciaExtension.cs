@@ -1,7 +1,9 @@
 ﻿using ClienteCRUD.Domain.Repositories;
+using ClienteCRUD.Domain.Security.Criptography;
 using ClienteCRUD.Domain.Services.ClienteLogado;
 using ClienteCRUD.Infrastructure.DataAcess;
 using ClienteCRUD.Infrastructure.DataAcess.Repositories;
+using ClienteCRUD.Infrastructure.Security.Criptography;
 using ClienteCRUD.Infrastructure.Services.ClienteLogado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,7 @@ namespace ClienteCRUD.Infrastructure
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {      
+            SenhaCriptografada(services);
             AddDbContext_MySql(services, configuration);
             AddRepositories(services);
             AddClienteLogado(services);
@@ -33,6 +36,10 @@ namespace ClienteCRUD.Infrastructure
         private static void AddClienteLogado(IServiceCollection services)
         {
             services.AddScoped<IClienteLogado, ClienteLogado>();
+        }
+        private static void SenhaCriptografada(IServiceCollection services)
+        {
+            services.AddScoped<ISenhaCriptografada>(options => new Sha512Encripter());
         }
     }
 }

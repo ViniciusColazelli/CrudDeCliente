@@ -1,5 +1,4 @@
-﻿using ClienteCRUD.Application.Services.Criptografia;
-using ClienteCRUD.Application.UseCases.Login;
+﻿using ClienteCRUD.Application.UseCases.Login;
 using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
 using ClienteCRUD.Application.UseCases.Update;
@@ -12,7 +11,6 @@ namespace ClienteCRUD.Application
         public static void AddApplication(this IServiceCollection services)
         {
             AdicionarUseCases(services);
-            SenhaCriptografada(services);
         }
 
         private static void AdicionarUseCases(IServiceCollection services)
@@ -21,11 +19,6 @@ namespace ClienteCRUD.Application
             services.AddScoped<ILoginUsuarioUseCase, LoginUsuarioUseCase>(); // aqui é a mesma coisa, só que para o LoginUsuarioUseCase
             services.AddScoped<IGetClienteProfileUseCase, GetClienteProfileUseCase>();
             services.AddScoped<IUpdateClienteUseCase, UpdateClienteUseCase>();
-        }
-
-        private static void SenhaCriptografada(IServiceCollection services)
-        {
-            services.AddScoped(options => new SenhaCriptografada());
         }
     }
 }
