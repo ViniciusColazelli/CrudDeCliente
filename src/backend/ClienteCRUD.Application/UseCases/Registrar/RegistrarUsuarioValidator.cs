@@ -1,4 +1,5 @@
-﻿using ClienteCRUD.Communication.Requests;
+﻿using ClienteCRUD.Application.SharedValidators;
+using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Exceptions;
 using FluentValidation;
 
@@ -13,8 +14,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             RuleFor(usuario => usuario.CPF.Length).Equal(11).WithMessage(ResourceMensagensDeErro.CPF_INVALIDO);
             RuleFor(usuario => usuario.Email).NotEmpty().WithMessage(ResourceMensagensDeErro.EMAIL_VAZIO);
             RuleFor(usuario => usuario.Email).EmailAddress().WithMessage(ResourceMensagensDeErro.EMAIL_INVALIDO);
-            RuleFor(usuario => usuario.Senha).NotEmpty().WithMessage(ResourceMensagensDeErro.SENHA_VAZIA);
-            RuleFor(usuario => usuario.Senha.Length).GreaterThanOrEqualTo(6).WithMessage(ResourceMensagensDeErro.SENHA_INVALIDA);
+            RuleFor(usuario => usuario.Senha).SetValidator(new SenhaValidator<RequestRegistrarUsuario>());
         }
     }
 }

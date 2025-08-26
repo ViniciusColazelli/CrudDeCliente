@@ -1,6 +1,7 @@
 ﻿using ClienteCRUD.Application.UseCases.Login;
 using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
+using ClienteCRUD.Application.UseCases.TrocarSenha;
 using ClienteCRUD.Application.UseCases.Update;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,7 @@ namespace ClienteCRUD.Application
             services.AddScoped<ILoginUsuarioUseCase, LoginUsuarioUseCase>(); // aqui é a mesma coisa, só que para o LoginUsuarioUseCase
             services.AddScoped<IGetClienteProfileUseCase, GetClienteProfileUseCase>();
             services.AddScoped<IUpdateClienteUseCase, UpdateClienteUseCase>();
+            services.AddScoped<ITrocarSenhaUseCase, TrocarSenhaUseCase>();
         }
     }
 }

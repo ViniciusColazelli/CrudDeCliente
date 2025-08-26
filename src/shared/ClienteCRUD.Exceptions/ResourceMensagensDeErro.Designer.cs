@@ -133,6 +133,15 @@ namespace ClienteCRUD.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Não foi possível alterar a senha. Verifique sua senha atual e tente novamente..
+        /// </summary>
+        public static string SENHA_ATUAL_NAO_REGISTRADA {
+            get {
+                return ResourceManager.GetString("SENHA_ATUAL_NAO_REGISTRADA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A senha deve possuir mais de 6 caracteres.
         /// </summary>
         public static string SENHA_INVALIDA {
