@@ -1,8 +1,8 @@
-﻿using ClienteCRUD.Application.Services.Criptografia;
-using ClienteCRUD.Application.Services.Mapeamento;
+﻿using ClienteCRUD.Application.Services.Mapeamento;
 using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
 using ClienteCRUD.Domain.Repositories;
+using ClienteCRUD.Domain.Security.Criptography;
 using ClienteCRUD.Exceptions;
 using ClienteCRUD.Exceptions.ExceptionBase;
 
@@ -12,10 +12,12 @@ namespace ClienteCRUD.Application.UseCases.Registrar
     {
         private readonly IUserRepository _userRepository;
         private readonly ISalvarDB _salvarDB;
-        public RegistrarUsuarioUseCase(IUserRepository userRepository, ISalvarDB salvarDB)
+        private readonly ISenhaCriptografada _senhaCriptografada;
+        public RegistrarUsuarioUseCase(IUserRepository userRepository, ISalvarDB salvarDB, ISenhaCriptografada senhaCriptografada)
         {
             _userRepository = userRepository;
             _salvarDB = salvarDB;
+            _senhaCriptografada = senhaCriptografada;
         }
 
         public async Task<ResponseUsuarioRegistrado> Execute(RequestRegistrarUsuario request) // metodo para executar a request, dentro dela tera as nossas regras de negocio para registrar um cliente.
@@ -26,8 +28,7 @@ namespace ClienteCRUD.Application.UseCases.Registrar
             var user = MapearRequest.RequestParaEntidade(request);
 
             // Criptografar a senha
-            var criptografiaDeSenha = new SenhaCriptografada();
-            user.Senha = criptografiaDeSenha.Criptografia(request.Senha);
+            user.Senha = _senhaCriptografada.Criptografia(request.Senha);
 
             // Adicionar no banco de dados
             await _userRepository.Adicionar(user);

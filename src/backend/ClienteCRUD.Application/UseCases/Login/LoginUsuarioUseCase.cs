@@ -1,7 +1,7 @@
-﻿using ClienteCRUD.Application.Services.Criptografia;
-using ClienteCRUD.Communication.Requests;
+﻿using ClienteCRUD.Communication.Requests;
 using ClienteCRUD.Communication.Responses;
 using ClienteCRUD.Domain.Repositories;
+using ClienteCRUD.Domain.Security.Criptography;
 using ClienteCRUD.Exceptions.ExceptionBase;
 
 namespace ClienteCRUD.Application.UseCases.Login
@@ -9,9 +9,9 @@ namespace ClienteCRUD.Application.UseCases.Login
     public class LoginUsuarioUseCase : ILoginUsuarioUseCase
     {
         private readonly IUserRepository _userRepository;
-        private readonly SenhaCriptografada _senhaCriptografada;
+        private readonly ISenhaCriptografada _senhaCriptografada;
 
-        public LoginUsuarioUseCase(IUserRepository userRepository,SenhaCriptografada senhaCriptografada)
+        public LoginUsuarioUseCase(IUserRepository userRepository,ISenhaCriptografada senhaCriptografada)
         {
             _userRepository = userRepository;
             _senhaCriptografada = senhaCriptografada;
