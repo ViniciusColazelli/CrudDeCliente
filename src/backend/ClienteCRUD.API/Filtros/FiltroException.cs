@@ -3,6 +3,7 @@ using ClienteCRUD.Exceptions;
 using ClienteCRUD.Exceptions.ExceptionBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 using System.Net;
 
 // essa classe serve de filtro recebendo uma interface e tendo como padrão de implementação o metodo OnException
@@ -29,6 +30,11 @@ namespace ClienteCRUD.API.Filtros
         private void LidarComExceptions(ExceptionContext contexto)
         {
             if (contexto.Exception is ErroEmLoginException)
+            {
+                contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                contexto.Result = new UnauthorizedObjectResult(new ResponseErro(contexto.Exception.Message));
+            }
+            else if (contexto.Exception is ClienteNaoLogadoException)
             {
                 contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 contexto.Result = new UnauthorizedObjectResult(new ResponseErro(contexto.Exception.Message));

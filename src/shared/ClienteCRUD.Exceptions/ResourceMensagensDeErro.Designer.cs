@@ -61,6 +61,15 @@ namespace ClienteCRUD.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nenhum cliente logado..
+        /// </summary>
+        public static string CLIENTE_NAO_LOGADO {
+            get {
+                return ResourceManager.GetString("CLIENTE_NAO_LOGADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O CPF deve ter 11 digitos.
         /// </summary>
         public static string CPF_INVALIDO {
