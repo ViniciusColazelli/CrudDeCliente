@@ -10,8 +10,6 @@ namespace ClienteCRUD.Application.UseCases.Registrar
         public RegistrarUsuarioValidator()
         {
             RuleFor(usuario => usuario.Nome).NotEmpty().WithMessage(ResourceMensagensDeErro.NOME_VAZIO);
-            RuleFor(usuario => usuario.CPF).NotEmpty().WithMessage(ResourceMensagensDeErro.CPF_VAZIO);
-            RuleFor(usuario => usuario.CPF.Length).Equal(11).WithMessage(ResourceMensagensDeErro.CPF_INVALIDO);
             RuleFor(usuario => usuario.Email).NotEmpty().WithMessage(ResourceMensagensDeErro.EMAIL_VAZIO);
             RuleFor(usuario => usuario.Email).EmailAddress().WithMessage(ResourceMensagensDeErro.EMAIL_INVALIDO);
             RuleFor(usuario => usuario.Senha).SetValidator(new SenhaValidator<RequestRegistrarUsuario>());

@@ -1,4 +1,4 @@
-using ClienteCRUD.API.Converters;
+Ôªøusing ClienteCRUD.API.Converters;
 using ClienteCRUD.API.Filtros;
 using ClienteCRUD.Application;
 using ClienteCRUD.Infrastructure;
@@ -8,12 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter())); // esse AddJsonOptions serve para adicionar o nosso conversor de string
-builder.Services.AddEndpointsApiExplorer();                                                                                       // que foi criado na pasta Converters, que serve para remover os espaÁos
+builder.Services.AddEndpointsApiExplorer();                                                                                       // que foi criado na pasta Converters, que serve para remover os espa√ßos
 builder.Services.AddSwaggerGen();                                                                                                 // em branco extras de uma string e
-                                                                                                                                  // deixar como padr„o um espaÁo em branco entre uma palavra,
-                                                                                                                                  // por exemplo: "Vinicius Colazelli" tem um espaÁo entre o nome e sobrenome
+                                                                                                                                  // deixar como padr√£o um espa√ßo em branco entre uma palavra,
+                                                                                                                                  // por exemplo: "Vinicius Colazelli" tem um espa√ßo entre o nome e sobrenome
 
-builder.Services.AddMvc(opcao => opcao.Filters.Add(typeof(FiltroException))); // esse builder serve para que nossa API entenda que essa classe 'FiltroException' seja utilizada como um filtro de ExceÁ„o
+builder.Services.AddMvc(opcao => opcao.Filters.Add(typeof(FiltroException))); // esse builder serve para que nossa API entenda que essa classe 'FiltroException' seja utilizada como um filtro de Exce√ß√£o
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
@@ -24,9 +24,21 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddInfrastructure(builder.Configuration); // esses dois servem para adicionar as injeÁıes de dependencia de infraestrutura e application.
-builder.Services.AddApplication();                    // Esse parametro builder.Configuration È para pegar as configuraÁıes do appsettings.Development.json, no caso a connection string do banco de dados.
+builder.Services.AddInfrastructure(builder.Configuration); // esses dois servem para adicionar as inje√ß√µes de dependencia de infraestrutura e application.
+builder.Services.AddApplication();                    // Esse parametro builder.Configuration √© para pegar as configura√ß√µes do appsettings.Development.json, no caso a connection string do banco de dados.
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontEnd", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // ‚Üê obrigat√≥rio para cookie de sess√£o funcionar
+    });
+});
 
 var app = builder.Build();
 
@@ -38,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSession();
+
+app.UseCors("FrontEnd");
 
 app.UseHttpsRedirection();
 
