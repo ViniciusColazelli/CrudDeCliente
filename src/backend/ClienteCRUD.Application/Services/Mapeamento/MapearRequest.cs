@@ -10,8 +10,7 @@ namespace ClienteCRUD.Application.Services.Mapeamento
             return new User()
             {
                 Nome = request.Nome,
-                Email = request.Email,
-                CPF = request.CPF
+                Email = request.Email
             };
         }
     }
