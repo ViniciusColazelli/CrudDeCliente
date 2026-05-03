@@ -53,7 +53,7 @@ app.UseSession();
 
 app.UseCors("FrontEnd");
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
