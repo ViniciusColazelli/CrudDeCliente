@@ -1,1 +1,1 @@
-Projeto API com ASP.NET, CRUD simples de registro de cliente
+Projeto API com ASP.NET, CRUD de registro de clientes, produtos e pedidos para um E-commerce
