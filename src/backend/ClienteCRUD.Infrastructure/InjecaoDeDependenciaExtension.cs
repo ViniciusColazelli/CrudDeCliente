@@ -16,16 +16,16 @@ namespace ClienteCRUD.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {      
             SenhaCriptografada(services);
-            AddDbContext_MySql(services, configuration);
+            AddDbContext_PostgreSql(services, configuration);
             AddRepositories(services);
             AddClienteLogado(services);
         }
-        private static void AddDbContext_MySql(IServiceCollection services, IConfiguration configuration)
+        private static void AddDbContext_PostgreSql(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("ConnectionMysql");  // aqui eu estou pegando a string de conexão do appsettings pelo configuration
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 41));
-
-            services.AddDbContext<ClienteCrudDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
+            services.AddDbContext<ClienteCrudDbContext>(dbContextOptions =>
+            {
+                dbContextOptions.UseNpgsql(configuration.GetConnectionString("ConnectionPostgreSql"));
+            });
         }
         private static void AddRepositories(IServiceCollection services)
         {
