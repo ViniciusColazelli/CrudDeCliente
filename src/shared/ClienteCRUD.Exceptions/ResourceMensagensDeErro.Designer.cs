@@ -70,20 +70,11 @@ namespace ClienteCRUD.Exceptions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O CPF deve ter 11 digitos.
+        ///   Looks up a localized string similar to A customização do item não pode estar vazia..
         /// </summary>
-        public static string CPF_INVALIDO {
+        public static string CUSTOMIZACAO_VAZIA {
             get {
-                return ResourceManager.GetString("CPF_INVALIDO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O CPF não pode ser vazio.
-        /// </summary>
-        public static string CPF_VAZIO {
-            get {
-                return ResourceManager.GetString("CPF_VAZIO", resourceCulture);
+                return ResourceManager.GetString("CUSTOMIZACAO_VAZIA", resourceCulture);
             }
         }
         
@@ -138,6 +129,42 @@ namespace ClienteCRUD.Exceptions {
         public static string NOME_VAZIO {
             get {
                 return ResourceManager.GetString("NOME_VAZIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O pedido deve ter pelo menos um item..
+        /// </summary>
+        public static string PEDIDO_SEM_ITENS {
+            get {
+                return ResourceManager.GetString("PEDIDO_SEM_ITENS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produto inválido..
+        /// </summary>
+        public static string PRODUTO_INVALIDO {
+            get {
+                return ResourceManager.GetString("PRODUTO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Produto não encontrado..
+        /// </summary>
+        public static string PRODUTO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("PRODUTO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A quantidade deve ser maior que zero..
+        /// </summary>
+        public static string QUANTIDADE_INVALIDA {
+            get {
+                return ResourceManager.GetString("QUANTIDADE_INVALIDA", resourceCulture);
             }
         }
         

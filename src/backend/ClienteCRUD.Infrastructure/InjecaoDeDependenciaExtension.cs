@@ -30,8 +30,9 @@ namespace ClienteCRUD.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<ISalvarDB, SalvarDB>();
-
             services.AddScoped<IUserRepository, UserRepository>(); // quando alguem solicitar um "IUserRepository" eu preciso devolver uma instancia do meu "UserRepository" dando um new no UserRepository
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
         }
         private static void AddClienteLogado(IServiceCollection services)
         {
