@@ -46,6 +46,11 @@ namespace ClienteCRUD.API.Filtros
                 contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 contexto.Result = new BadRequestObjectResult(new ResponseErro(exception!.MensagemDeErro));
             }
+            else if (contexto.Exception is NotFoundException)
+            {
+                contexto.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                contexto.Result = new NotFoundObjectResult(new ResponseErro(contexto.Exception.Message));
+            }
         }
 
         private void ThrowExceptionDesconhecida(ExceptionContext contexto)

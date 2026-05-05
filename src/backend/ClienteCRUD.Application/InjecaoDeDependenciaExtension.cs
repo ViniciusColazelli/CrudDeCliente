@@ -1,4 +1,9 @@
 ﻿using ClienteCRUD.Application.UseCases.Login;
+using ClienteCRUD.Application.UseCases.Pedidos.CalcularPreco;
+using ClienteCRUD.Application.UseCases.Pedidos.CriarPedido;
+using ClienteCRUD.Application.UseCases.Pedidos.ListarPedidos;
+using ClienteCRUD.Application.UseCases.Produtos.GetProdutoDetalhe;
+using ClienteCRUD.Application.UseCases.Produtos.ListarProdutos;
 using ClienteCRUD.Application.UseCases.Profile;
 using ClienteCRUD.Application.UseCases.Registrar;
 using ClienteCRUD.Application.UseCases.TrocarSenha;
@@ -21,6 +26,11 @@ namespace ClienteCRUD.Application
             services.AddScoped<IGetClienteProfileUseCase, GetClienteProfileUseCase>();
             services.AddScoped<IUpdateClienteUseCase, UpdateClienteUseCase>();
             services.AddScoped<ITrocarSenhaUseCase, TrocarSenhaUseCase>();
+            services.AddScoped<IListarProdutosUseCase, ListarProdutosUseCase>();
+            services.AddScoped<IGetProdutoDetalheUseCase, GetProdutoDetalheUseCase>();
+            services.AddScoped<ICalcularPrecoUseCase, CalcularPrecoUseCase>();
+            services.AddScoped<ICriarPedidoUseCase, CriarPedidoUseCase>();
+            services.AddScoped<IListarPedidosUseCase, ListarPedidosUseCase>();
         }
     }
 }
